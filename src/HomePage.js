@@ -14,17 +14,37 @@ const HomePage = ({}) => {
     setNotes([...notes, []]);
   }
 
+  function deleteNote(noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    workingNotes[boardIndex].splice(noteIndex, 1);
+    setNotes(workingNotes);
+  }
+
+  function deleteBoard(boardIndex) {
+    var workingNotes = deepCopy(notes);
+    workingNotes.splice(boardIndex, 1);
+    setNotes(workingNotes);
+  }
+
   return (
     <div>
-      {notes.map((book, index) => {
+      {notes.map((board, boardIndex) => {
         return (
           <div>
             <ul>
-              {book.map(note => {
-                return <li>{note}</li>;
+              {board.map((note, noteIndex) => {
+                return (
+                  <React.Fragment>
+                    <li>{note}</li>
+                    <button onClick={() => deleteNote(noteIndex, boardIndex)}>
+                      x
+                    </button>
+                  </React.Fragment>
+                );
               })}
             </ul>
-            <button onClick={() => addNote(index)}>New Note</button>
+            <button onClick={() => addNote(boardIndex)}>New Note</button>
+            <button onClick={() => deleteBoard(boardIndex)}>x</button>
           </div>
         );
       })}
