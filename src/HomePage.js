@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { deepCopy } from "./deepCopy";
+import { createNote } from "./note";
+import { createBoard } from "./board";
 
 const HomePage = ({}) => {
-  const [notes, setNotes] = useState([["hi"], ["yo"]]);
+  const [notes, setNotes] = useState([]);
 
   function addNote(index) {
     var workingNotes = deepCopy(notes);
-    workingNotes[index].push("new");
+    workingNotes[index].notes.push(createNote("note", "new"));
     setNotes(workingNotes);
   }
 
   function addBoard() {
-    setNotes([...notes, []]);
+    setNotes([...notes, createBoard("New Board", [])]);
   }
 
   function deleteNote(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].splice(noteIndex, 1);
+    workingNotes[boardIndex].notes.splice(noteIndex, 1);
     setNotes(workingNotes);
   }
 
@@ -31,11 +33,12 @@ const HomePage = ({}) => {
       {notes.map((board, boardIndex) => {
         return (
           <div>
+            <h2>{board.title}</h2>
             <ul>
-              {board.map((note, noteIndex) => {
+              {board.notes.map((note, noteIndex) => {
                 return (
                   <React.Fragment>
-                    <li>{note}</li>
+                    <li>{note.content}</li>
                     <button onClick={() => deleteNote(noteIndex, boardIndex)}>
                       x
                     </button>
