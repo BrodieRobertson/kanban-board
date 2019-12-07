@@ -7,25 +7,10 @@ import { createBoard } from "./board";
 const BoardContainer = () => {
   const [notes, setNotes] = useState([]);
 
+  // Note Functions
   function addNote(index) {
     var workingNotes = deepCopy(notes);
     workingNotes[index].notes.push(createNote("note", "new"));
-    setNotes(workingNotes);
-  }
-
-  function addBoard() {
-    setNotes([...notes, createBoard("New Board", [])]);
-  }
-
-  function deleteNote(noteIndex, boardIndex) {
-    var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].notes.splice(noteIndex, 1);
-    setNotes(workingNotes);
-  }
-
-  function deleteBoard(boardIndex) {
-    var workingNotes = deepCopy(notes);
-    workingNotes.splice(boardIndex, 1);
     setNotes(workingNotes);
   }
 
@@ -39,6 +24,29 @@ const BoardContainer = () => {
     var workingNotes = deepCopy(notes);
     workingNotes[boardIndex].notes[noteIndex].content = event.target.value;
     workingNotes[boardIndex].notes[noteIndex].edit = false;
+    setNotes(workingNotes);
+  }
+
+  function deleteNote(noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    workingNotes[boardIndex].notes.splice(noteIndex, 1);
+    setNotes(workingNotes);
+  }
+
+  function changeNoteColor(event, noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    workingNotes[boardIndex].notes[noteIndex].color = event.target.value;
+    setNotes(workingNotes);
+  }
+
+  // Board Functions
+  function addBoard() {
+    setNotes([...notes, createBoard("New Board", [])]);
+  }
+
+  function deleteBoard(boardIndex) {
+    var workingNotes = deepCopy(notes);
+    workingNotes.splice(boardIndex, 1);
     setNotes(workingNotes);
   }
 
@@ -69,6 +77,7 @@ const BoardContainer = () => {
             saveNoteEdit={saveNoteEdit}
             saveBoardEdit={saveBoardEdit}
             deleteBoard={deleteBoard}
+            changeNoteColor={changeNoteColor}
           ></BoardElement>
         );
       })}

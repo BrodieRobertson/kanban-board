@@ -10,7 +10,8 @@ const BoardElement = ({
   saveNoteEdit,
   editBoard,
   saveBoardEdit,
-  deleteBoard
+  deleteBoard,
+  changeNoteColor
 }) => {
   return (
     <div>
@@ -33,6 +34,7 @@ const BoardElement = ({
                 editNote={editNote}
                 saveNoteEdit={saveNoteEdit}
                 deleteNote={deleteNote}
+                changeNoteColor={changeNoteColor}
               ></NoteElement>
             </React.Fragment>
           );
