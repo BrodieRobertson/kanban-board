@@ -45,6 +45,7 @@ const NoteElement = ({
       <input
         type="color"
         onChange={e => changeNoteColor(e, noteIndex, boardIndex)}
+        value={note.color}
       />
     </React.Fragment>
   );
