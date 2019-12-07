@@ -1,6 +1,6 @@
 import React from "react";
 import NoteElement from "./NoteElement";
-import "./BoardElement.css";
+import "./styles/BoardElement.css";
 
 const BoardElement = ({
   board,

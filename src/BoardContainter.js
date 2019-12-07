@@ -3,7 +3,7 @@ import { deepCopy } from "./deepCopy";
 import BoardElement from "./BoardElement";
 import { createNote } from "./note";
 import { createBoard } from "./board";
-import "./Grid.css";
+import "./styles/Layout.css";
 
 const BoardContainer = () => {
   const [notes, setNotes] = useState([]);

@@ -1,5 +1,7 @@
 import React from "react";
 import { hexToRgb, brightness } from "./colorUtils";
+import "./styles/Layout.css";
+import "./styles/NoteElement.css";
 
 const NoteElement = ({
   note,
@@ -10,11 +12,14 @@ const NoteElement = ({
   deleteNote,
   changeNoteColor
 }) => {
+  /**
+   * Selects a colour for the note font based on the brightness of the
+   * background colour
+   */
   function selectFontColor(background) {
     if (background) {
       let rgb = hexToRgb(background);
       let brightnessLevel = brightness(rgb[0], rgb[1], rgb[2]);
-      console.log(brightnessLevel);
       if (brightnessLevel > 128) {
         return "black";
       } else {
@@ -26,8 +31,9 @@ const NoteElement = ({
   }
 
   return (
-    <React.Fragment>
+    <div className="flex-container">
       <div
+        className="note-text"
         style={{
           background: note.color ? note.color : "#ffffff",
           color: selectFontColor(note.color)
@@ -36,10 +42,12 @@ const NoteElement = ({
         onBlur={e => saveNoteEdit(e, noteIndex, boardIndex)}
       >
         {!note.edit ? (
-          <React.Fragment>{note.content}</React.Fragment>
+          <p>{note.content}</p>
         ) : (
-          <input placeholder={note.content} />
+          <textarea>{note.content}</textarea>
         )}
+      </div>
+      <div>
         <button onClick={() => deleteNote(noteIndex, boardIndex)}>x</button>
         <input
           type="color"
@@ -47,7 +55,7 @@ const NoteElement = ({
           value={note.color}
         />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
