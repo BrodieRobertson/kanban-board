@@ -3,6 +3,7 @@ import { deepCopy } from "./deepCopy";
 import BoardElement from "./BoardElement";
 import { createNote } from "./note";
 import { createBoard } from "./board";
+import "./Grid.css";
 
 const BoardContainer = () => {
   const [notes, setNotes] = useState([]);
@@ -65,22 +66,24 @@ const BoardContainer = () => {
 
   return (
     <div>
-      {notes.map((board, boardIndex) => {
-        return (
-          <BoardElement
-            board={board}
-            boardIndex={boardIndex}
-            addNote={addNote}
-            deleteNote={deleteNote}
-            editNote={editNote}
-            editBoard={editBoard}
-            saveNoteEdit={saveNoteEdit}
-            saveBoardEdit={saveBoardEdit}
-            deleteBoard={deleteBoard}
-            changeNoteColor={changeNoteColor}
-          ></BoardElement>
-        );
-      })}
+      <div className="grid-container">
+        {notes.map((board, boardIndex) => {
+          return (
+            <BoardElement
+              board={board}
+              boardIndex={boardIndex}
+              addNote={addNote}
+              deleteNote={deleteNote}
+              editNote={editNote}
+              editBoard={editBoard}
+              saveNoteEdit={saveNoteEdit}
+              saveBoardEdit={saveBoardEdit}
+              deleteBoard={deleteBoard}
+              changeNoteColor={changeNoteColor}
+            ></BoardElement>
+          );
+        })}
+      </div>
       <button onClick={addBoard}>New Board</button>
     </div>
   );

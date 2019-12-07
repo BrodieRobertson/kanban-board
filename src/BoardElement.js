@@ -1,5 +1,6 @@
 import React from "react";
 import NoteElement from "./NoteElement";
+import "./BoardElement.css";
 
 const BoardElement = ({
   board,
@@ -14,7 +15,7 @@ const BoardElement = ({
   changeNoteColor
 }) => {
   return (
-    <div>
+    <div className={"board"}>
       {!board.edit ? (
         <h2 onClick={() => editBoard(boardIndex)}>{board.title}</h2>
       ) : (

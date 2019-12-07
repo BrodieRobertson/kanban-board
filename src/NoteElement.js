@@ -40,13 +40,13 @@ const NoteElement = ({
         ) : (
           <input placeholder={note.content} />
         )}
+        <button onClick={() => deleteNote(noteIndex, boardIndex)}>x</button>
+        <input
+          type="color"
+          onChange={e => changeNoteColor(e, noteIndex, boardIndex)}
+          value={note.color}
+        />
       </div>
-      <button onClick={() => deleteNote(noteIndex, boardIndex)}>x</button>
-      <input
-        type="color"
-        onChange={e => changeNoteColor(e, noteIndex, boardIndex)}
-        value={note.color}
-      />
     </React.Fragment>
   );
 };
