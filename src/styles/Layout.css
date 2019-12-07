@@ -4,3 +4,10 @@
   grid-gap: 25px 25px;
 }
 
+.flex-container {
+  display: flex;
+}
+
+.margin-auto {
+  margin: auto;
+}
