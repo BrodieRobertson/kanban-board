@@ -1,3 +1,6 @@
+:root {
+  --small: 0.5em;
+}
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -10,4 +13,32 @@
 
 .margin-auto {
   margin: auto;
+}
+
+.margin-small {
+  margin: var(--small);
+}
+
+.margin-right-small {
+  margin-right: var(--small);
+}
+
+.margin-left-small {
+  margin-left: var(--small);
+}
+
+.margin-top-small {
+  margin-top: var(--small);
+}
+
+.margin-bottom-small {
+  margin-bottom: var(--small);
+}
+
+.padding-small {
+  padding: var(--small);
+}
+
+.padding-left-small {
+  padding-left: var(--small);
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import NoteElement from "./NoteElement";
 import "./styles/BoardElement.css";
+import "./styles/Layout.css";
 
 const BoardElement = ({
   board,
@@ -15,7 +16,7 @@ const BoardElement = ({
   changeNoteColor
 }) => {
   return (
-    <div className={"board"}>
+    <div className="board padding-small">
       {!board.edit ? (
         <h2 onClick={() => editBoard(boardIndex)}>{board.title}</h2>
       ) : (
@@ -42,7 +43,12 @@ const BoardElement = ({
         })}
       </div>
       <button onClick={() => addNote(boardIndex)}>New Note</button>
-      <button onClick={() => deleteBoard(boardIndex)}>x</button>
+      <button
+        className="margin-left-small"
+        onClick={() => deleteBoard(boardIndex)}
+      >
+        x
+      </button>
     </div>
   );
 };

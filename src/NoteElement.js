@@ -31,9 +31,9 @@ const NoteElement = ({
   }
 
   return (
-    <div className="flex-container">
+    <div className="flex-container margin-bottom-small">
       <div
-        className="note-text"
+        className="note-text padding-small margin-right-small"
         style={{
           background: note.color ? note.color : "#ffffff",
           color: selectFontColor(note.color)
@@ -47,7 +47,7 @@ const NoteElement = ({
           <textarea>{note.content}</textarea>
         )}
       </div>
-      <div>
+      <div className="margin-auto">
         <button onClick={() => deleteNote(noteIndex, boardIndex)}>x</button>
         <input
           type="color"

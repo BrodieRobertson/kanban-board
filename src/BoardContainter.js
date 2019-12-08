@@ -84,7 +84,12 @@ const BoardContainer = () => {
           );
         })}
       </div>
-      <button onClick={addBoard}>New Board</button>
+      <button
+        className="margin-top-small margin-bottom-small"
+        onClick={addBoard}
+      >
+        New Board
+      </button>
     </div>
   );
 };
