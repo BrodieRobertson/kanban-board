@@ -6,7 +6,32 @@ import { createBoard } from "./board";
 import "./styles/Layout.css";
 
 const BoardContainer = () => {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([
+    {
+      title: "1",
+      notes: [
+        {
+          type: "note",
+          content: "more different data",
+          edit: false,
+          color: "#ffffff"
+        },
+        { type: "note", content: "data", edit: false, color: "#ffffff" }
+      ],
+      edit: false,
+      color: "#d3d3d3"
+    },
+    {
+      title: "2",
+      notes: [
+        { type: "note", content: "1", edit: false, color: "#ffffff" },
+        { type: "note", content: "2", edit: false, color: "#ffffff" },
+        { type: "note", content: "3", edit: false, color: "#ffffff" }
+      ],
+      edit: false,
+      color: "#d3d3d3"
+    }
+  ]);
 
   // Note Functions
   /**
@@ -29,7 +54,13 @@ const BoardContainer = () => {
    */
   function saveNoteEdit(event, noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].notes[noteIndex].content = event.target.value;
+
+    if (event.target.value === "") {
+      workingNotes[boardIndex].notes[noteIndex].content =
+        event.target.placeholder;
+    } else {
+      workingNotes[boardIndex].notes[noteIndex].content = event.target.value;
+    }
     workingNotes[boardIndex].notes[noteIndex].edit = false;
     setNotes(workingNotes);
   }
@@ -77,7 +108,13 @@ const BoardContainer = () => {
    */
   function saveBoardEdit(event, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].title = event.target.value;
+
+    if (event.target.value === "") {
+      workingNotes[boardIndex].title = event.target.placeholder;
+    } else {
+      workingNotes[boardIndex].title = event.target.value;
+    }
+
     workingNotes[boardIndex].edit = false;
     setNotes(workingNotes);
   }

@@ -37,7 +37,8 @@ const BoardElement = ({
         <input
           onBlur={e => saveBoardEdit(e, boardIndex)}
           className="margin-bottom-small"
-          value={board.title}
+          placeholder="Title"
+          defaultValue={board.title}
         />
       )}
       <div>

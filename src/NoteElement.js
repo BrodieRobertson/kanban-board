@@ -32,7 +32,7 @@ const NoteElement = ({
         {!note.edit ? (
           <p>{note.content}</p>
         ) : (
-          <textarea>{note.content}</textarea>
+          <textarea placeholder="Note" defaultValue={note.content} />
         )}
       </div>
       <div className="margin-auto">
