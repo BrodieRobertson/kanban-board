@@ -30,7 +30,8 @@ const BoardElement = ({
       ) : (
         <input
           onBlur={e => saveBoardEdit(e, boardIndex)}
-          placeholder={board.title}
+          className="margin-bottom-small"
+          value={board.title}
         />
       )}
       <div>
@@ -53,6 +54,7 @@ const BoardElement = ({
       <button onClick={() => addNote(boardIndex)}>New Note</button>
       <input
         type="color"
+        className="margin-left-small"
         onChange={e => changeBoardColor(e, boardIndex)}
         value={board.color}
       />
