@@ -1,8 +1,9 @@
 import React from "react";
 import NoteElement from "./NoteElement";
+import { selectFontColor } from "./colorUtils";
 import "./styles/BoardElement.css";
 import "./styles/Layout.css";
-import { selectFontColor } from "./colorUtils";
+import "./styles/Border.css";
 
 const BoardElement = ({
   board,
@@ -24,7 +25,7 @@ const BoardElement = ({
   }
   return (
     <div
-      className="padding-small"
+      className="padding-small border-curved-small"
       style={{
         background: board.color ? board.color : "#d3d3d3",
         color: selectFontColor(board.color)

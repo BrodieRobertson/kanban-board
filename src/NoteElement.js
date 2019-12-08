@@ -1,6 +1,7 @@
 import React from "react";
 import { selectFontColor } from "./colorUtils";
 import "./styles/Layout.css";
+import "./styles/Border.css";
 import "./styles/NoteElement.css";
 
 const NoteElement = ({
@@ -20,7 +21,7 @@ const NoteElement = ({
   return (
     <div className="flex-container margin-bottom-small">
       <div
-        className="note-text padding-small margin-right-small"
+        className="note-text padding-small margin-right-small border-curved-small"
         style={{
           background: note.color ? note.color : "#ffffff",
           color: selectFontColor(note.color)
