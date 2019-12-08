@@ -70,9 +70,22 @@ const BoardContainer = () => {
     setNotes(workingNotes);
   }
 
+  //setTimeout("create('Hello world!', 'myfile.txt', 'text/plain')");
+  function create(text, type) {
+    var file = new Blob([text], { type: type });
+    return URL.createObjectURL(file);
+  }
+
+  function downloadData() {
+    let a = document.createElement("a");
+    a.href = create(JSON.stringify(notes), "text/plain");
+    a.download = "kanban-data.json";
+    a.click();
+  }
+
   return (
     <div>
-      <div className="grid-container">
+      <div className="grid-container margin-bottom-small">
         {notes.map((board, boardIndex) => {
           return (
             <BoardElement
@@ -92,10 +105,19 @@ const BoardContainer = () => {
         })}
       </div>
       <button
-        className="margin-top-small margin-bottom-small"
+        className="margin-bottom-small margin-right-small"
         onClick={addBoard}
       >
         New Board
+      </button>
+      <button className="margin-bottom-small margin-right-small">
+        Import Data
+      </button>
+      <button
+        onClick={downloadData}
+        className="margin-bottom-small margin-right-small"
+      >
+        Export Data
       </button>
     </div>
   );
