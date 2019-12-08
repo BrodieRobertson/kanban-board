@@ -2,6 +2,7 @@ import React from "react";
 import NoteElement from "./NoteElement";
 import "./styles/BoardElement.css";
 import "./styles/Layout.css";
+import { selectFontColor } from "./colorUtils";
 
 const BoardElement = ({
   board,
@@ -13,10 +14,17 @@ const BoardElement = ({
   editBoard,
   saveBoardEdit,
   deleteBoard,
-  changeNoteColor
+  changeNoteColor,
+  changeBoardColor
 }) => {
   return (
-    <div className="board padding-small">
+    <div
+      className="padding-small"
+      style={{
+        background: board.color ? board.color : "#d3d3d3",
+        color: selectFontColor(board.color)
+      }}
+    >
       {!board.edit ? (
         <h2 onClick={() => editBoard(boardIndex)}>{board.title}</h2>
       ) : (
@@ -43,6 +51,11 @@ const BoardElement = ({
         })}
       </div>
       <button onClick={() => addNote(boardIndex)}>New Note</button>
+      <input
+        type="color"
+        onChange={e => changeBoardColor(e, boardIndex)}
+        value={board.color}
+      />
       <button
         className="margin-left-small"
         onClick={() => deleteBoard(boardIndex)}

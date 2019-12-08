@@ -64,6 +64,12 @@ const BoardContainer = () => {
     setNotes(workingNotes);
   }
 
+  function changeBoardColor(event, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    workingNotes[boardIndex].color = event.target.value;
+    setNotes(workingNotes);
+  }
+
   return (
     <div>
       <div className="grid-container">
@@ -80,6 +86,7 @@ const BoardContainer = () => {
               saveBoardEdit={saveBoardEdit}
               deleteBoard={deleteBoard}
               changeNoteColor={changeNoteColor}
+              changeBoardColor={changeBoardColor}
             ></BoardElement>
           );
         })}

@@ -1,5 +1,5 @@
 import React from "react";
-import { hexToRgb, brightness } from "./colorUtils";
+import { selectFontColor } from "./colorUtils";
 import "./styles/Layout.css";
 import "./styles/NoteElement.css";
 
@@ -12,24 +12,6 @@ const NoteElement = ({
   deleteNote,
   changeNoteColor
 }) => {
-  /**
-   * Selects a colour for the note font based on the brightness of the
-   * background colour
-   */
-  function selectFontColor(background) {
-    if (background) {
-      let rgb = hexToRgb(background);
-      let brightnessLevel = brightness(rgb[0], rgb[1], rgb[2]);
-      if (brightnessLevel > 128) {
-        return "black";
-      } else {
-        return "white";
-      }
-    } else {
-      return "black";
-    }
-  }
-
   return (
     <div className="flex-container margin-bottom-small">
       <div
