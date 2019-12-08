@@ -11,6 +11,10 @@
   display: flex;
 }
 
+.display-none {
+  display: none;
+}
+
 .margin-auto {
   margin: auto;
 }
