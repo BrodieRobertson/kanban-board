@@ -17,6 +17,11 @@ const BoardElement = ({
   changeNoteColor,
   changeBoardColor
 }) => {
+  function askBeforeDelete() {
+    if (window.confirm("Would you like to delete this board?")) {
+      deleteBoard(boardIndex);
+    }
+  }
   return (
     <div
       className="padding-small"
@@ -58,10 +63,7 @@ const BoardElement = ({
         onChange={e => changeBoardColor(e, boardIndex)}
         value={board.color}
       />
-      <button
-        className="margin-left-small"
-        onClick={() => deleteBoard(boardIndex)}
-      >
+      <button className="margin-left-small" onClick={askBeforeDelete}>
         x
       </button>
     </div>

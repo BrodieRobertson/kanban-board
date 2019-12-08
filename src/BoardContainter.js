@@ -125,6 +125,7 @@ const BoardContainer = () => {
   }
 
   /**
+   * Click on the file upload button
    */
   function clickImport() {
     let upload = document.getElementById("import-btn");

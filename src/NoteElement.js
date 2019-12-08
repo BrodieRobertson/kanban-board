@@ -12,6 +12,11 @@ const NoteElement = ({
   deleteNote,
   changeNoteColor
 }) => {
+  function askBeforeDelete() {
+    if (window.confirm("Would you like to delete this note?")) {
+      deleteNote(noteIndex, boardIndex);
+    }
+  }
   return (
     <div className="flex-container margin-bottom-small">
       <div
@@ -30,7 +35,7 @@ const NoteElement = ({
         )}
       </div>
       <div className="margin-auto">
-        <button onClick={() => deleteNote(noteIndex, boardIndex)}>x</button>
+        <button onClick={askBeforeDelete}>x</button>
         <input
           type="color"
           onChange={e => changeNoteColor(e, noteIndex, boardIndex)}
