@@ -4,6 +4,9 @@ import "./styles/Layout.css";
 import "./styles/Border.css";
 import "./styles/NoteElement.css";
 
+/**
+ * A note component to display a note
+ */
 const NoteElement = ({
   note,
   noteIndex,
@@ -17,6 +20,9 @@ const NoteElement = ({
   moveNoteDown,
   moveNoteUp
 }) => {
+  /**
+   * Prompts the user beforre deleting a note
+   */
   function askBeforeDelete() {
     if (window.confirm("Would you like to delete this note?")) {
       deleteNote(noteIndex, boardIndex);

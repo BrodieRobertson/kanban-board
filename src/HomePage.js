@@ -1,6 +1,9 @@
 import React from "react";
-import BoardContainer from "./BoardContainter";
+import BoardContainer from "./BoardContainer";
 
+/**
+ * The home page for the kanban board
+ */
 const HomePage = () => {
   return (
     <React.Fragment>

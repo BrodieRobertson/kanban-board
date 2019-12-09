@@ -1,5 +1,5 @@
 /**
- *
+ * Converts a hex value to an rgb array
  */
 export function hexToRgb(hex) {
   return hex
@@ -13,7 +13,7 @@ export function hexToRgb(hex) {
 }
 
 /**
- *
+ * Converts an rgb value to it's brightness
  */
 export function brightness(r, g, b) {
   return 0.299 * r + 0.587 * r + 0.114 * r;

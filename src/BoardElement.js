@@ -5,6 +5,9 @@ import "./styles/BoardElement.css";
 import "./styles/Layout.css";
 import "./styles/Border.css";
 
+/**
+ * A board component to display the notes
+ */
 const BoardElement = ({
   board,
   boardIndex,
@@ -22,6 +25,9 @@ const BoardElement = ({
   moveNoteDown,
   moveNoteUp
 }) => {
+  /**
+   * Prompts the user before deleting a board
+   */
   function askBeforeDelete() {
     if (window.confirm("Would you like to delete this board?")) {
       deleteBoard(boardIndex);

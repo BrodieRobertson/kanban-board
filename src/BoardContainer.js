@@ -5,6 +5,9 @@ import { createNote } from "./note";
 import { createBoard } from "./board";
 import "./styles/Layout.css";
 
+/**
+ * Container element for holding the boards
+ */
 const BoardContainer = () => {
   const [notes, setNotes] = useState([
     {
@@ -33,28 +36,58 @@ const BoardContainer = () => {
     }
   ]);
 
+  /**
+   * Checks that a board index is valid
+   */
+  function checkValidBoardIndex(boardIndex) {
+    return boardIndex < notes.length;
+  }
+
+  /**
+   * Checks that a note index is within the boards
+   */
+  function checkValidNoteIndex(noteIndex, boardIndex) {
+    return (
+      boardIndex < notes.length && noteIndex < notes[boardIndex].notes.length
+    );
+  }
+
   // Note Functions
   /**
+   * Adds a new note into one of the boards of notes specified by the index
    */
   function addNote(index) {
     var workingNotes = deepCopy(notes);
-    workingNotes[index].notes.push(createNote("note", "new"));
+    if (checkValidBoardIndex(index)) {
+      workingNotes[index].notes.push(createNote("note", "new"));
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Switches the specified note into edit mode
    */
   function editNote(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].notes[noteIndex].edit = true;
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      workingNotes[boardIndex].notes[noteIndex].edit = true;
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Saves the edits made to the content of a specified note
    */
   function saveNoteEdit(event, noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
 
+    if (!checkValidNoteIndex(noteIndex, boardIndex)) {
+      return;
+    }
+
+    // Use the content of the changed note or the placeholder text if
+    // no text is available
     if (event.target.value === "") {
       workingNotes[boardIndex].notes[noteIndex].content =
         event.target.placeholder;
@@ -66,74 +99,106 @@ const BoardContainer = () => {
   }
 
   /**
+   * Deletes specified note from the boards of notes
    */
   function deleteNote(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].notes.splice(noteIndex, 1);
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      workingNotes[boardIndex].notes.splice(noteIndex, 1);
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Changes the background color of a specified note
    */
   function changeNoteColor(event, noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].notes[noteIndex].color = event.target.value;
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      workingNotes[boardIndex].notes[noteIndex].color = event.target.value;
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Moves a note up a position within the same board, or wraps to bottom if
+   * already at the top
    */
   function moveNoteUp(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    let newIndex =
-      noteIndex - 1 >= 0
-        ? noteIndex - 1
-        : workingNotes[boardIndex].notes.length - 1;
-    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
-    workingNotes[boardIndex].notes.splice(newIndex, 0, note);
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      let newIndex =
+        noteIndex - 1 >= 0
+          ? noteIndex - 1
+          : workingNotes[boardIndex].notes.length - 1;
+      let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+      workingNotes[boardIndex].notes.splice(newIndex, 0, note);
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Moves a note down a position within the same board, or wraps to the top if
+   * already at the bottom
    */
   function moveNoteDown(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    let newIndex =
-      noteIndex + 1 < workingNotes[boardIndex].notes.length ? noteIndex + 1 : 0;
-    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
-    workingNotes[boardIndex].notes.splice(newIndex, 0, note);
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      let newIndex =
+        noteIndex + 1 < workingNotes[boardIndex].notes.length
+          ? noteIndex + 1
+          : 0;
+      let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+      workingNotes[boardIndex].notes.splice(newIndex, 0, note);
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Moves a note to the board to the left of the board it's in, or wraps
+   * around to the right if already in the left most board
    */
   function moveNoteLeft(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    let newIndex =
-      boardIndex - 1 >= 0 ? boardIndex - 1 : workingNotes.length - 1;
-    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
-    workingNotes[newIndex].notes.push(note);
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      let newIndex =
+        boardIndex - 1 >= 0 ? boardIndex - 1 : workingNotes.length - 1;
+      let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+      workingNotes[newIndex].notes.push(note);
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Moves a note to the board to the right of the board it's in, or wraps
+   * around to the left if already in the right most board
    */
   function moveNoteRight(noteIndex, boardIndex) {
     var workingNotes = deepCopy(notes);
-    let newIndex = boardIndex + 1 < workingNotes.length ? boardIndex + 1 : 0;
-    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
-    workingNotes[newIndex].notes.push(note);
+
+    if (checkValidNoteIndex(noteIndex, boardIndex)) {
+      let newIndex = boardIndex + 1 < workingNotes.length ? boardIndex + 1 : 0;
+      let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+      workingNotes[newIndex].notes.push(note);
+    }
     setNotes(workingNotes);
   }
 
   // Board Functions
   /**
+   * Adds a new board into the list of boards
    */
   function addBoard() {
     setNotes([...notes, createBoard("New Board", [])]);
   }
 
   /**
+   * Deletes a specified board from the list of boards
    */
   function deleteBoard(boardIndex) {
     var workingNotes = deepCopy(notes);
@@ -142,18 +207,30 @@ const BoardContainer = () => {
   }
 
   /**
+   * Switches a specified board into edit mode
    */
   function editBoard(boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].edit = true;
+
+    if (checkValidBoardIndex(boardIndex)) {
+      workingNotes[boardIndex].edit = true;
+    }
     setNotes(workingNotes);
   }
 
   /**
+   * Saves edits made to the specified board, or sets the text to the
+   * placeholder if no text is provided
    */
   function saveBoardEdit(event, boardIndex) {
     var workingNotes = deepCopy(notes);
 
+    if (!checkValidBoardIndex(boardIndex)) {
+      return;
+    }
+
+    // Use the content of the changed board or the placeholder text if
+    // no text is available
     if (event.target.value === "") {
       workingNotes[boardIndex].title = event.target.placeholder;
     } else {
@@ -165,15 +242,20 @@ const BoardContainer = () => {
   }
 
   /**
+   * Change the background color of the specified board
    */
   function changeBoardColor(event, boardIndex) {
     var workingNotes = deepCopy(notes);
-    workingNotes[boardIndex].color = event.target.value;
+
+    if (checkValidBoardIndex(boardIndex)) {
+      workingNotes[boardIndex].color = event.target.value;
+    }
     setNotes(workingNotes);
   }
 
   // Data Functions
   /**
+   * Creates a new file blob and returns a url to it
    */
   function create(text, type) {
     var file = new Blob([text], { type: type });
@@ -181,6 +263,7 @@ const BoardContainer = () => {
   }
 
   /**
+   * Prompts the user to download the board data
    */
   function downloadData() {
     let a = document.createElement("a");
@@ -190,14 +273,17 @@ const BoardContainer = () => {
   }
 
   /**
+   * If the file type is JSON it will be parsed and stored on the page.
    */
   function uploadData(e) {
     let file = e.target.files[0];
 
+    // Only accept JSON files
     if (!file || file.type !== "application/json") {
       window.alert("Invalid file type");
       return;
     } else {
+      // Parse the data and set the value of notes to it
       const reader = new FileReader();
       reader.onload = e => {
         setNotes(JSON.parse(e.target.result));

@@ -3,7 +3,6 @@
  *
  * @function deepCopy
  * @author [Brodie Robertson](https://github.com/BrodieRobertson)
- * @memberof module::UTILS
  * @param object The object being copied
  * @returns A deep copy of an objects
  */
