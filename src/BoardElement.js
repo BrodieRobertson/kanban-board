@@ -23,7 +23,9 @@ const BoardElement = ({
   moveNoteLeft,
   moveNoteRight,
   moveNoteDown,
-  moveNoteUp
+  moveNoteUp,
+  moveBoardLeft,
+  moveBoardRight
 }) => {
   /**
    * Prompts the user before deleting a board
@@ -81,6 +83,22 @@ const BoardElement = ({
       />
       <button className="margin-left-small" onClick={askBeforeDelete}>
         x
+      </button>
+      <button
+        className="margin-left-small"
+        onClick={() => moveBoardLeft(boardIndex)}
+      >
+        <span role="img" aria-label="left arrow" aria-labelledby="">
+          ⬅️
+        </span>
+      </button>
+      <button
+        className="margin-left-small"
+        onClick={() => moveBoardRight(boardIndex)}
+      >
+        <span role="img" aria-label="right arrow" aria-labelledby="">
+          ➡️
+        </span>
       </button>
     </div>
   );

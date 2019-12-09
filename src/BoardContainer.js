@@ -253,6 +253,37 @@ const BoardContainer = () => {
     setNotes(workingNotes);
   }
 
+  /**
+   * Moves a board to the left or wraps around around to the right
+   * if already in the left most position
+   */
+  function moveBoardLeft(boardIndex) {
+    var workingNotes = deepCopy(notes);
+
+    if (checkValidBoardIndex(boardIndex)) {
+      let newIndex =
+        boardIndex - 1 >= 0 ? boardIndex - 1 : workingNotes.length - 1;
+      let note = workingNotes.splice(boardIndex, 1)[0];
+      workingNotes.splice(newIndex, 0, note);
+    }
+    setNotes(workingNotes);
+  }
+
+  /**
+   * Moves a board to the right or wraps around to the left if
+   * already in the right most position
+   */
+  function moveBoardRight(boardIndex) {
+    var workingNotes = deepCopy(notes);
+
+    if (checkValidBoardIndex(boardIndex)) {
+      let newIndex = boardIndex + 1 < workingNotes.length ? boardIndex + 1 : 0;
+      let note = workingNotes.splice(boardIndex, 1)[0];
+      workingNotes.splice(newIndex, 0, note);
+    }
+    setNotes(workingNotes);
+  }
+
   // Data Functions
   /**
    * Creates a new file blob and returns a url to it
@@ -321,6 +352,8 @@ const BoardContainer = () => {
               moveNoteDown={moveNoteDown}
               moveNoteLeft={moveNoteLeft}
               moveNoteRight={moveNoteRight}
+              moveBoardRight={moveBoardRight}
+              moveBoardLeft={moveBoardLeft}
             ></BoardElement>
           );
         })}
