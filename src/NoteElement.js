@@ -11,7 +11,11 @@ const NoteElement = ({
   editNote,
   saveNoteEdit,
   deleteNote,
-  changeNoteColor
+  changeNoteColor,
+  moveNoteLeft,
+  moveNoteRight,
+  moveNoteDown,
+  moveNoteUp
 }) => {
   function askBeforeDelete() {
     if (window.confirm("Would you like to delete this note?")) {
@@ -42,6 +46,29 @@ const NoteElement = ({
           onChange={e => changeNoteColor(e, noteIndex, boardIndex)}
           value={note.color}
         />
+      </div>
+      <div className="margin-auto">
+        <button onClick={() => moveNoteLeft(noteIndex, boardIndex)}>
+          <span role="img" aria-label="left arrow" aria-labelledby="">
+            ⬅️
+          </span>
+        </button>
+
+        <button onClick={() => moveNoteRight(noteIndex, boardIndex)}>
+          <span role="img" aria-label="right arrow" aria-labelledby="">
+            ➡️
+          </span>
+        </button>
+        <button onClick={() => moveNoteDown(noteIndex, boardIndex)}>
+          <span role="img" aria-label="down arrow" aria-labelledby="">
+            ⬇️
+          </span>
+        </button>
+        <button onClick={() => moveNoteUp(noteIndex, boardIndex)}>
+          <span role="img" aria-label="up arrow" aria-labelledby="">
+            ⬆️
+          </span>
+        </button>
       </div>
     </div>
   );

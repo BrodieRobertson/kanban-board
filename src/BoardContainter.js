@@ -81,6 +81,51 @@ const BoardContainer = () => {
     setNotes(workingNotes);
   }
 
+  /**
+   */
+  function moveNoteUp(noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    let newIndex =
+      noteIndex - 1 >= 0
+        ? noteIndex - 1
+        : workingNotes[boardIndex].notes.length - 1;
+    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+    workingNotes[boardIndex].notes.splice(newIndex, 0, note);
+    setNotes(workingNotes);
+  }
+
+  /**
+   */
+  function moveNoteDown(noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    let newIndex =
+      noteIndex + 1 < workingNotes[boardIndex].notes.length ? noteIndex + 1 : 0;
+    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+    workingNotes[boardIndex].notes.splice(newIndex, 0, note);
+    setNotes(workingNotes);
+  }
+
+  /**
+   */
+  function moveNoteLeft(noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    let newIndex =
+      boardIndex - 1 >= 0 ? boardIndex - 1 : workingNotes.length - 1;
+    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+    workingNotes[newIndex].notes.push(note);
+    setNotes(workingNotes);
+  }
+
+  /**
+   */
+  function moveNoteRight(noteIndex, boardIndex) {
+    var workingNotes = deepCopy(notes);
+    let newIndex = boardIndex + 1 < workingNotes.length ? boardIndex + 1 : 0;
+    let note = workingNotes[boardIndex].notes.splice(noteIndex, 1)[0];
+    workingNotes[newIndex].notes.push(note);
+    setNotes(workingNotes);
+  }
+
   // Board Functions
   /**
    */
@@ -186,6 +231,10 @@ const BoardContainer = () => {
               deleteBoard={deleteBoard}
               changeNoteColor={changeNoteColor}
               changeBoardColor={changeBoardColor}
+              moveNoteUp={moveNoteUp}
+              moveNoteDown={moveNoteDown}
+              moveNoteLeft={moveNoteLeft}
+              moveNoteRight={moveNoteRight}
             ></BoardElement>
           );
         })}

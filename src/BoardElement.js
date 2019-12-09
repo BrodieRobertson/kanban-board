@@ -16,7 +16,11 @@ const BoardElement = ({
   saveBoardEdit,
   deleteBoard,
   changeNoteColor,
-  changeBoardColor
+  changeBoardColor,
+  moveNoteLeft,
+  moveNoteRight,
+  moveNoteDown,
+  moveNoteUp
 }) => {
   function askBeforeDelete() {
     if (window.confirm("Would you like to delete this board?")) {
@@ -53,6 +57,10 @@ const BoardElement = ({
                 saveNoteEdit={saveNoteEdit}
                 deleteNote={deleteNote}
                 changeNoteColor={changeNoteColor}
+                moveNoteUp={moveNoteUp}
+                moveNoteDown={moveNoteDown}
+                moveNoteRight={moveNoteRight}
+                moveNoteLeft={moveNoteLeft}
               ></NoteElement>
             </React.Fragment>
           );
